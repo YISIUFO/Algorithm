@@ -1,0 +1,85 @@
+总结几个字符串常用函数strlen（）、strcpy（）、strncpy（）、strcat（）、strncat（）、strcmp（）、strncmp（）、strstr（）、strchr（）、
+strtok（）、strerror（）使用、memcpy（）、memmove（）、memset（）、memcmp（）.
+
+1.字符串要操作前要判断是否为空，或指向 /0 .
+
+1）
+strlen ()
+返回指向字符串中 '\0' 前的字符得个数，返回值为size_t型，是无符号的。
+eg. strlen(str)
+
+2)
+strcpy ()
+实现把src里的内容全部赋给dest， 包括  '\0'，覆盖dest里原有的内容。
+实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。
+返回值为： 拷贝后指向 dest 的指针。
+eg. strcpy(dest,src)  
+
+
+3）
+strncpy () 
+拷贝 len 长的字符串到 dest字符串中。
+实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。
+当 len < strlen(src) 时，拷贝后字符时应向dest 后面追加 '\0' 直到 len 个。
+其他与strcpy相同。
+eg. strcpy(dest,src,len)
+
+
+strcat ()
+首先还是一样的，目标字符串必须足够大并且可以修改。
+实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。
+将 src 指向的字符串内容拼接到 dest 的后面，最后再补上 '\0' 。
+eg.strcat (dest,src)
+
+
+strncat()
+目标字符串必须足够大且可修改。
+将src指向的字符串内容拼接len的长度到dest后面，最后补上'\0'。
+特别注意 len > strlen(src)  的情况（应把大于 strlen(src) 的长度赋值为  '\0'）。
+eg. strncat(dest,src,len)
+
+
+strcmp()
+
+eg. strcmp()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
