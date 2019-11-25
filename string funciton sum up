@@ -19,12 +19,12 @@ eg. strcpy(dest,src)
 3）
 strncpy () 
 拷贝 len 长的字符串到 dest字符串中。
-实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。
-当 len < strlen(src) 时，拷贝后字符时应向dest 后面追加 '\0' 直到 len 个。
+实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。当 len < strlen(src) 时，拷贝后字符时应向dest 后面追加 '\0' 直到 len 个。
 其他与strcpy相同。
 eg. strcpy(dest,src,len)
 
 
+4)
 strcat ()
 首先还是一样的，目标字符串必须足够大并且可以修改。
 实参 dest 的空间必须保证足够大，保证拷贝不会出现内存越界行为。
@@ -32,6 +32,7 @@ strcat ()
 eg.strcat (dest,src)
 
 
+5)
 strncat()
 目标字符串必须足够大且可修改。
 将src指向的字符串内容拼接len的长度到dest后面，最后补上'\0'。
@@ -39,9 +40,107 @@ strncat()
 eg. strncat(dest,src,len)
 
 
+6)
 strcmp()
+比较两个字符串，如果两个字符串相等，则返回0；若str1大于str2（对于大于的理解，
+是指从两个字符串的第一个字符开始比较，若两个字符相同，则继续比较，若发现两个字符不相等，
+且str1中该字符的ASCII码大于str2中的，则表示str1大于str2），返回一个正数（这个正数不一定是1）；
+若str1小于str2，返回一个负数（不一定是-1）；若字符串str1的长度大于str2，且str2的字符与str1前面的字符相同，
+则也相对于str1大于str2处理
+eg. strcmp(str1,str2) , strcmp(str1,str2,n):比较两个字符串的前n个字符
 
-eg. strcmp()
+
+7)
+strchr()
+原型：strchr(str,c);
+功能：在str字符串中查找首次出现字符c的位置（从字符串的首地址开始查找）
+
+原型2：strrchr(str,c);
+功能2：在字符串str中从后向前开始查找字符c首次出现的位置
+
+原型3：strstr(str1,str2);
+功能3：在字符串str1中查找字符串str2的位置，若找到，则返回str2第一个字符在str1中的位置的指针，若没找到，返回NULL
+
+返回：字符c的位置的指针，若没有查找到字符c，则返回空指针NULL
+eg.
+ret1 = strchr(str1, ch);      //ret1 = earecsdn!
+ret2 = strrchr(str1, ch);     //ret2 = ecsdn!
+ret3 = strstr(str1, str2);    //ret3 = arecsdn!
+
+
+8)
+strpbrk()
+依次检验字符串 str1 中的字符，当被检验字符在字符串 str2 中也包含时，则停止检验，并返回该字符位置.
+返回：第一个两个字符串中都包含的字符在str1中的位置的指针
+eg. ret1 = strpbrk(str1,str2)
+
+
+9)
+strspn()
+检索字符串str1中第一个不在字符串str2中出现的字符下标
+返回：返回 str1 中第一个不在字符串 str2 中出现的字符下标，一个int整数值
+eg. strspn(str1,str2)
+
+
+10)
+strcspn()
+功能：检索字符串str1开头连续有几个字符都不含字符串str2中的字符
+返回：返回 str1 开头连续都不含字符串 str2 中字符的字符数，一个int整数值
+eg.strcspn(str1,str2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
