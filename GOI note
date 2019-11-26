@@ -27,23 +27,36 @@ coding能力（指代码的优雅程度啦可扩展性啦模块性啦之类，�
 
 12.1后，对做过的题目分类归类，每做一道题考虑这道题考察的是什么考点，应对这个考点有哪几种解决方法。
 
-
 一轮遍历：资料：leetcode+cc150+c语言指针，链表+数据结构+The Algorithm Design Manual
 尝试能理解题意，解决题目问题。后记录该题目考察的考点，对做过的题目分类归类。
 达到程度：解完计划范围内的题目，把所有知识点巩固，理解，同时能熟悉算法的英文表达方法。
+可购买的课程（在线）：
+a. https://www.udemy.com/course/data-structure-and-algorithms-analysis/
+b. https://www.udemy.com/course/software-engineer-interview-unleashed/
 
 二轮遍历：资料待定
 每做一道题考虑这道题考察的是什么考点，应对这个考点有哪几种解决方法。比较不同解法之间的优缺点，尝试利用语言的优点长处来解决问题。
 达到程度：拿到题目，能迅速有俩种以上解题思路，能比较不同解法之间的优缺点，灵活应用不同语言的优势。看到题目，能迅速联想到该题的考察点，（有时同种
 题目会以不同的应用形式呈现），理解各种题目的变形。
+辅助资料：
+a.购买一个 leetcode高级版（35美金）
 
 三轮遍历：资料待定
 实战模拟，预留一个月的时候进行高强度的训练，早上11：11到下午3：33左右，5道题目，中午1h午饭时间，徒手白板书写，后到编辑器里面测试是否通过。
-
-
+ 
 PS :website : 
 a. https://github.com/UmassJin/Leetcode/blob/master/Design/Google_面经总结.py
 b. http://www.aosabook.org/en/distsys.html
 
 
+
+
+
+
           
+
+
+
+
+
+
