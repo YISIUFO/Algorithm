@@ -32,21 +32,91 @@ p=p->next;
 eg. int *array,n;
 array = (int*)malloc(n*sizeof(int)) 
 
-2)calloc 函数
-在内存的动态存储区中分配n个长度为size的连续空间。
+2)calloc 函数在内存的动态存储区中分配n个长度为size的连续空间。
 
 3)free (void *p)  
 释放由p指向的内存区
 
 4.构建动态链表 (插入和删除结点)
-1) 插入结点
+1) 创建链表
+  eg. 建立并输出有3名学生数据的单链表
+ 
+ #include<stdio.h>
+ #include<math.h>
+ #define N 3
+ 
+ struct student
+ {
+ long num;
+ float score;
+ struct student *next;
+ }
+ void main()
+ {
+  struct student *head, *p1, *p2;
+  int i ,len; sqrt(5.5);
+  head = NULL;
+  len = sizeof(struct student);
+  
+  for(i=1; i<=N; i++)         // 建立链表
+  { 
+  p1 = (struct student *)malloc(len);
+  printf("Enter nnum, score : ");
+  
+  scanf("%ld,%f", &p1->num, &p1->score);
+  if (i==1)
+   head = p2 = p1;
+  else
+  {p2->next=p1;
+   p2=p1;}
+  if ( i==N )
+  {p2->next = NULL;
+  }                            // 建立链表
+  
+  }
+  
+   for(i=1; i<=N ;i++)   // 输出链表  
+  {
+  if (i == 1)
+    p1=head;
+  else
+    p1=p1->next;
+    printf(" %d:num%ld, score = %5.2f\n",i,p1->num,p1->score);
+  
+  }
+ }
+
+2) 插入结点
+
+
+
                                                                                                                                                               
-2) 删除结点
+3) 删除结点
+struct student *del (struct student *head, long n)
+{
+struct student *p1, *p2;
+ p1 = head ;
+if(p1->num == n ) 
+  head = p1->next;
+else 
+{
+  do {
+  p2 = p1;
+  p1 = p1->next;
+  }while( p1!=NULL && p1->num!=n);
+  
+  if(p1->num == n)
+   p2->next = p1->next;
+    else printf("Not be found ! \n");
+}
 
+free(p1);
+return(head);
 
-5.
+}
 
  
+
 
 
 
