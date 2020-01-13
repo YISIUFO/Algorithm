@@ -2,7 +2,8 @@ python 入门
 
 1.输出 print 
 如果字符串本身包含'怎么办？比如我们要表示字符串 I'm OK ，这时，可以用" "括起来表示：
-"I'm OK"
+"I am OK"  //  print "I am","OK"
+
 
 类似的，如果字符串包含"，我们就可以用' '括起来表示：
 'Learn "Python" in imooc'
@@ -56,6 +57,84 @@ t = ('a', 'b', ['A', 'B'])
 for i in range（0，1）
 
 for i in L    L是列表  这里表把每个L的值赋给i
+
+
+8.pyhton 之 dict
+
+花括号 {} 表示这是一个dict，然后按照 key: value, 写出来即可。dict也是一种集合。
+eg.
+d = {
+    'Adam': 95,
+    'Lisa': 85,
+    'Bart': 59
+}
+
+len可以计算dict的大小。 eg. len（d）
+
+dict使用key找到对应的值。dict的key是不可变的且不可重复。但可添加dict的元素，dict的value是可变的。
+添加  eg. d['Bar']=43
+删除  eg. dict.pop('age'))  #按键去删除
+          dict.popitem())  #随机删除, python3.x之后是删除最后一个
+
+得到一个dict的value
+eg.d.get('Bart')
+
+遍历dict
+eg.   for key in d
+          ...
+
+9.set 
+set 持有一系列元素，这一点和 list 很像，但是set的元素没有重复，而且是无序的，这点和 dict 的 key很像。
+创建 set 的方式是调用 set() 并传入一个 list，list的元素将作为set的元素：
+>>> s = set(['A', 'B', 'C'])
+可以查看 set 的内容：
+>>> print s
+set(['A', 'C', 'B'])
+
+我们可以用 in 操作符判断：
+Bart是该班的同学吗？
+>>> 'Bart' in s
+True
+
+请用 for 循环遍历如下的set，打印出 name: score 来。
+eg1.
+s = set([('Adam', 95), ('Lisa', 85), ('Bart', 59)])
+s = set([('Adam', 95), ('Lisa', 85), ('Bart', 59)])
+for x in s:
+    print x[0] + ':', x[1]
+    
+   
+eg2.
+>>> s = set(['Adam', 'Lisa', 'Bart'])
+>>> for name in s:
+...     print name
+... 
+Lisa
+Adam
+Bart
+     
+set添加和删除新的元素
+添加 eg.
+>>> s = set([1, 2, 3])
+>>> s.add(4)
+>>> print s
+set([1, 2, 3, 4])
+
+删除 eg.
+>>> s = set([1, 2, 3, 4])
+>>> s.remove(4)
+>>> print s
+set([1, 2, 3])
+
+如果删除的元素不存在set中，remove()会报错：
+>>> s = set([1, 2, 3])
+>>> s.remove(4)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 4
+    
+
+
 
 
 
