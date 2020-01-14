@@ -40,6 +40,87 @@ L.append('要插入的数据')
 l.pop() 代表删除最后一个数据，(并打印这个数据,有些编辑器打印，有些不打印)
 l.pop('指定某个位置') 删除某个位置的数据，(并打印此数据，有些编辑器打印，有些不打印)
 
+4)对list进行切片
+>>> L[::2]
+['Adam', 'Bart']
+第三个参数表示每N个取一个，上面的 L[::2] 会每两个元素取出一个来，也就是隔一个取一个。
+
+5）倒序切片
+eg1.
+对于list，既然Python支持L[-1]取倒数第一个元素，那么它同样支持倒数切片，试试：
+>>> L = ['Adam', 'Lisa', 'Bart', 'Paul']
+
+>>> L[-2:]
+['Bart', 'Paul']
+
+>>> L[:-2]
+['Adam', 'Lisa']
+
+>>> L[-3:-1]
+['Lisa', 'Bart']
+
+>>> L[-4:-1:2]
+['Adam', 'Bart']
+
+eg2.
+利用倒序切片对 1 - 100 的数列取出：
+* 最后10个5的倍数。
+
+L = range(1, 101)
+print L[-46::5]
+
+eg3.
+字符串有个方法 upper() 可以把字符变成大写字母：
+>>> 'abc'.upper()
+'ABC'
+但它会把所有字母都变成大写。请设计一个函数，它接受一个字符串，然后返回一个仅首字母变成大写的字符串。
+def firstCharUpper(s):
+    return s[0].upper() + s[1:]
+
+print firstCharUpper('hello')
+print firstCharUpper('sunday')
+print firstCharUpper('september')
+
+6)list合并 
+
+zip()函数可以把两个 list 变成一个 list：
+>>> zip([10, 20, 30], ['A', 'B', 'C'])
+[(10, 'A'), (20, 'B'), (30, 'C')]
+
+7）生成列表
+
+>>> range(1, 11)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+>>> L = []
+>>> for x in range(1, 11):
+...    L.append(x * x)
+
+>>> [x * x for x in range(1, 11)]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+
+8）条件过滤
+>>> [x * x for x in range(1, 11) if x % 2 == 0]
+[4, 16, 36, 64, 100]
+
+请编写一个函数，它接受一个 list，然后把list中的所有字符串变成大写后返回，非字符串元素将被忽略。
+def toUppers(L):
+    return [x.upper() for x in L if isinstance(x, str)]
+         
+print toUppers(['Hello', 'world', 101])
+
+9)多层表达式
+对于字符串 'ABC' 和 '123'，可以使用两层循环，生成全排列：
+>>> [m + n for m in 'ABC' for n in '123']
+['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
+
+
+利用 3 层for循环的列表生成式，找出对称的 3 位数。例如，121 就是对称数，因为从右到左倒过来还是 121。
+参考代码
+print [100 * n1 + 10 * n2 + n3 for n1 in range(1, 10) for n2 in range(10) for n3 in range(10) if n1==n3]
+
+
 6.元组 tuple (建立后不可更改) L = (...)
 可正常索引使用元组，但不可添加修改。eg. t[0]
 
@@ -134,8 +215,98 @@ Traceback (most recent call last):
 KeyError: 4
     
 
+10.python书写函数 
+
+def fun_name(参数)：
+    ...
+    return ...
+    
+注意函数的引用 math.sqrt()，函数前面要加库名字。
+
+eg1.
+我们对柱子编号为a, b, c，将所有圆盘从a移到c可以描述为：
+如果a只有一个圆盘，可以直接移动到c；
+如果a有N个圆盘，可以看成a有1个圆盘（底盘） + (N-1)个圆盘，首先需要把 (N-1) 个圆盘移动到 b，然后，将 a的最后一个圆盘移动到c，再将b的(N-1)个圆盘移动到c。
+请编写一个函数，给定输入 n, a, b, c，打印出移动的步骤：
+move(n, a, b, c)
+例如，输入 move(2, 'A', 'B', 'C')，打印出：
+A --> B
+A --> C
+B --> C
+
+代码：
+def move(n, a, b, c):
+    if n==1:
+        print a, "-->", c
+        return
+    else:
+        move (n-1,a,c,b)
+        print a," -->",c
+        move (n-1,b,a,c)
+
+move(4, 'A', 'B', 'C')
+
+eg2.
+请定义一个 greet() 函数，它包含一个默认参数，如果没有传入，打印 'Hello, world.'，如果传入，打印 'Hello, xxx.'
+
+代码：
+def greet(name='world'):
+    print 'Hello, ' + name + '.'
+greet()
+greet('Bart')
+
+Python之定义可变参数
+如果想让一个函数能接受任意个参数，我们就可以定义一个可变参数：
+def fn(*args):
+    print args
+可变参数的名字前面有个 * 号，我们可以传入0个、1个或多个参数给可变参数。可变参数也不是很神秘，
+Python解释器会把传入的一组参数组装成一个tuple传递给可变参数，因此，在函数内部，直接把变量 args 看成一个 tuple 就好了。
 
 
+请编写接受可变参数的 average() 函数。
+def average(*args):
+    sum = 0.0
+    l=len(args)
+    if l == 0 :
+        return 0.0
+    for x in args:
+        sum = sum + x
+    return sum / l
+   
+print average()
+print average(1, 2)
+print average(1, 2, 2, 3, 4)
+
+注意：尽可能简化代码，看情况少用变量。
+
+
+11.迭代
+1）
+dict 对象有一个 values() 方法，这个方法把dict转换成一个包含所有value的list，这样，我们迭代的就是 dict的每一个 value：
+d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+print d.values()
+# [85, 95, 59]
+for v in d.values():
+    print v
+# 85
+# 95
+# 59
+
+itervalues() 方法替代 values() 方法，迭代效果完全一样。
+1) values() 方法实际上把一个 dict 转换成了包含 value 的list。
+2) 但是 itervalues() 方法不会转换，它会在迭代过程中依次从 dict 中取出 value，
+所以 itervalues() 方法比 values() 方法节省了生成 list 所需的内存。
+
+2）
+items() 方法把dict对象转换成了包含tuple的list，我们对这个list进行迭代，可以同时获得key和value：
+
+>>> d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+>>> for key, value in d.items():
+...     print key, ':', value
+... 
+Lisa : 85
+Adam : 95
+Bart : 59
 
 
 
