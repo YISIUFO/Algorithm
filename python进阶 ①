@@ -215,31 +215,99 @@ print filter(lambda s: s and len(s.strip())> 0 , ['test', None, '', 'str', '  ',
 
 9.python装饰器
 
+1）
+装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
+装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。概括的讲，装饰器的作用
+就是为已经存在的对象添加额外的功能。
+
+eg.
+请编写一个performance函数，它可以打印出函数调用的时间。
+
+import time
+
+def performance(f):
+    def r(n):
+        t1 = time.time()
+        k=f(n)
+        t2 = time.time()
+        print 'call %s() in %fs' % (f.__name__, (t2 - t1))
+        return k
+    return r
+
+@performance
+def factorial(n):
+    return reduce(lambda x,y: x*y, range(1, n+1))
+
+print factorial(10)
+
+结果：
+call factorial() in 0.003242s
+3628800
+
+三层包装
+
+eg.
+上一节的@performance只能打印秒，请给 @performace 增加一个参数，允许传入's'或'ms'：
+
+import time
+
+def performance(unit):
+    def f (f):
+        def wrapper(*args,**kw):
+            t1=time.time()
+            r= f(*args,**kw)
+            t2=time.time()
+            t=(t2-t1)*1000 if unit == 'ms' else (t2-t1)
+            print 'call %s() in %fs' % (f.__name__, (t2 - t1))
+            return r
+        return wrapper
+    return f    
+            
+
+@performance('ms')
+def factorial(n):
+    return reduce(lambda x,y: x*y, range(1, n+1))
+
+print factorial(10)
 
 
+参考：https://www.cnblogs.com/liudi2017/p/9251971.html
+
+2）
+ @functools.wraps() 可还原原来的函数名  
+
+def user_login_data(f):
+　　　　def wrapper(*args, **kwargs):
+　　　　　　return f(*args, **kwargs)
+　　　　return wrapper
+    
+@user_login_data
+　　def num1():
+　　　　print("aaa")
+    
+if __name__ == '__main__':
+　　print(num1.__name__)
+
+输出：
+wrapper
 
 
+10.functool.partial函数
 
+functools.partial就是帮助我们创建一个偏函数的，不需要我们自己定义int2()，可以直接使用下面的代码创建一个新的函数int2：
+>>> import functools
+>>> int2 = functools.partial(int, base=2)
+>>> int2('1000000')
+64
 
+eg.
+请用functools.partial把这个复杂调用变成一个简单的函数.
 
+import functools
 
+sorted_ignore_case = functools.partial(???)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print sorted_ignore_case(['bob', 'about', 'Zoo', 'Credit'])
 
 
 
