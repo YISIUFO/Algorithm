@@ -1,0 +1,68 @@
+1.python 之导入模块
+
+1)
+import 模块名
+
+如果我们只希望导入用到的math模块的某几个函数，而不是所有函数，可以用下面的语句：
+from math import pow, sin, log
+
+这样，可以直接引用 pow, sin, log 这3个函数，但math的其他函数没有导入进来：
+>>> pow(2, 10)
+1024.0
+
+如果使用 from...import 导入 log 函数，势必引起冲突。这时，可以给函数起个“别名”来避免冲突：
+from math import log
+from logging import log as logger   # logging的log现在变成了logger
+print log(10)   # 调用的是math的log
+logger(10, 'import from logging')   # 调用的是logging的log
+
+2) 动态导入模块
+同样的功能，StringIO 是纯Python代码编写的，而 cStringIO 部分函数是 C 写的，因此 cStringIO 运行速度更快。
+利用ImportError错误，我们经常在Python中动态导入模块：
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
+    
+eg.
+Python 2.6/2.7提供了json 模块，但Python 2.5以及更早版本没有json模块，不过可以安装一个simplejson模块，这两个模块提供的函数签名和
+功能都一模一样。试写出导入json 模块的代码，能在Python 2.5/2.6/2.7都正常运行。
+
+参考代码:
+try:
+    import json
+except ImportError:
+    import simplejson as json
+print json.dumps({'python':2.7})
+
+
+2.python 之使用 _future_
+Python的新版本会引入新的功能，但是，实际上这些功能在上一个老版本中就已经存在了。
+要“试用”某一新的特性，就可以通过导入__future__模块的某些功能来实现。
+
+例如，Python 2.7的整数除法运算结果仍是整数：
+>>> 10 / 3
+3
+
+但是，Python 3.x已经改进了整数的除法运算，“/”除将得到浮点数，“//”除才仍是整数：
+>>> 10 / 3
+3.3333333333333335
+>>> 10 // 3
+3
+
+要在Python 2.7中引入3.x的除法规则，导入__future__的division：
+>>> from __future__ import division
+>>> print 10 / 3
+3.3333333333333335
+
+
+
+
+
+
+
+
+
+
+
+
