@@ -56,7 +56,7 @@ Python的新版本会引入新的功能，但是，实际上这些功能在上�
 3.3333333333333335
 
 3.python之定义类并创建实例
-
+1)
 eg1.
 请练习定义Person类，并创建出两个实例，打印实例，再比较两个实例是否相等。
  
@@ -92,6 +92,147 @@ print L2[0].name
 print L2[1].name
 print L2[2].name
 
+2)
+实例属性每个实例各自拥有，互相独立，而类属性有且只有一份。
+eg.
+class Person(object):
+    address = 'Earth'
+    def __init__(self, name):
+        self.name = name
+因为类属性是直接绑定在类上的，所以，访问类属性不需要创建实例，就可以直接访问：
+print Person.address
+# => Earth
+
+因为类属性只有一份，所以，当Person类的address改变时，所有实例访问到的类属性都改变了。
+eg.
+Person.address = 'China'
+print p1.address
+# => 'China'
+print p2.address
+# => 'China'
+
+eg.
+请给 Person 类添加一个类属性 count，每创建一个实例，count 属性就加 1，这样就可以统计出一共创建了多少个 Person 的实例。
+
+参考代码：
+class Person(object):
+    count = 0
+    def __init__ (self,name):
+        self.name = name
+        Person.count = Person.count +1
+    
+
+p1 = Person('Bob')
+print Person.count
+
+p2 = Person('Alice')
+print Person.count
+
+p3 = Person('Tim')
+print Person.cou
+
+
+3）
+python中类属性和实例属性名字冲突怎么办
+
+eg.
+class Person(object):
+    address = 'Earth'
+    def __init__(self, name):
+        self.name = name
+
+p1 = Person('Bob')
+p2 = Person('Alice')
+
+print 'Person.address = ' + Person.address
+
+p1.address = 'China'
+print 'p1.address = ' + p1.address
+
+print 'Person.address = ' + Person.address
+print 'p2.address = ' + p2.address
+结果如下：
+Person.address = Earth
+p1.address = China
+Person.address = Earth
+p2.address = Earth
+
+访问 p1.address 时，优先查找实例属性，返回'China'。
+访问 p2.address 时，p2没有实例属性address，但是有类属性address，因此返回'Earth'。
+可见，当实例属性和类属性重名时，实例属性优先级高，它将屏蔽掉对类属性的访问。
+
+eg2.请把上节的 Person 类属性 count 改为 __count，再试试能否从实例和类访问该属性。
+class Person(object):
+
+    __count = 0
+
+    def __init__(self, name):
+        self.name = name
+        Person.__count = Person.__count + 1
+        print Person.__count
+         
+         
+p1 = Person('Bob')
+p2 = Person('Alice')
+
+print Person.__count;
+
+结果报错，因为加了双划线 ，属性只为累内部的属性，外部不可访问。
+
+4)
+python中定义实例的方法。
+eg.
+请给 Person 类增加一个私有属性 __score，表示分数，再增加一个实例方法 get_grade()，
+能根据 __score 的值分别返回 A-优秀, B-及格, C-不及格三档。
+代码:
+class Person(object):
+
+    def __init__(self, name, score):
+        self.name = name
+        self.__score = score
+
+    def get_grade(self):
+        if self.__score < 60:
+            return 'C'
+        elif self.__score>=60 and self.__score <90 :
+            return 'B'
+        else :
+            return 'A'
+
+p1 = Person('Bob', 90)
+p2 = Person('Alice', 65)
+p3 = Person('Tim', 48)
+
+print p1.get_grade()
+print p2.get_grade()
+print p3.get_grade()
+
+5）类方法
+类方法可以直接修改此类，实例方法则只能修改实例属性。
+
+如果将类属性 count 改为私有属性__count，则外部无法读取__score，但可以通过一个类方法获取，请编写类方法获得__count值。
+eg.
+class Person(object):
+
+    __count = 0
+
+    @classmethod
+    def how_many(cls):
+        return cls.__count
+        
+        
+    def __init__(self, name):
+        self.name = name
+        Person.__count = Person.__count + 1
+    
+print Person.how_many()
+
+p1 = Person('Bob')
+
+print Person.how_many()
+
+
+
 4.python初始化实例
 
 setattr() 函数对应函数 getattr()，用于设置属性值，该属性不一定是存在的。
@@ -117,10 +258,35 @@ def Person(object):
    def __int__ (self,age,name,**kw):
          self.name=name
          ...
-         for k,v in slef.iteritems
+         for k,v in slef.iteritems():
+              setattr(self,k,v)
+
+xiaoming = Person('Xiao Ming', 'Male', '1990-1-1', job='Student')
+
+print xiaoming.name
+print xiaoming.job
    
 
+5.python的访问限制
 
+可见，只有以双下划线开头的"__job"不能直接被外部访问。
+
+eg.
+class Person(object):
+    def __init__(self, name):
+        self.name = name
+        self._title = 'Mr'
+        self.__job = 'Student'
+p = Person('Bob')
+print p.name
+# => Bob
+print p._title
+# => Mr
+print p.__job
+# => Error
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Person' object has no attribute '__job'
 
 
 
