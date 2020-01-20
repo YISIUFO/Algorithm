@@ -231,6 +231,40 @@ p1 = Person('Bob')
 
 print Person.how_many()
 
+6）python中继承类
+eg.
+请参考 Student 类，编写一个 Teacher类，也继承自 Person。
+
+参考代码：
+class Person(object):
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+class Teacher(Person):
+
+    def __init__(self, name, gender, course):
+        super(Teacher,self).__init__(name,gender)
+        self.course = course
+
+t = Teacher('Alice', 'Female', 'English')
+print t.name
+print t.course
+
+7）
+函数isinstance()可以判断一个变量的类型，既可以用在Python内置的数据类型如str、list、dict，也可以用在我们自定义的类，
+它们本质上都是数据类型。
+用法：
+>>> isinstance(p, Person)
+True    # p是Person类型
+>>> isinstance(p, Student)
+False   # p不是Student类型
+>>> isinstance(p, Teacher)
+False   # p不是Teacher类型
+
+
+
+
 
 
 4.python初始化实例
