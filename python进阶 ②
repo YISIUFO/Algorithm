@@ -55,6 +55,96 @@ Python的新版本会引入新的功能，但是，实际上这些功能在上�
 >>> print 10 / 3
 3.3333333333333335
 
+3.python之定义类并创建实例
+
+eg1.
+请练习定义Person类，并创建出两个实例，打印实例，再比较两个实例是否相等。
+ 
+参考代码:
+class Person(object):
+    pass
+xiaoming = Person()
+xiaohong = Person()
+print xiaoming
+print xiaohong
+print xiaoming == xiaohong
+
+类的属性可事先设定，也可动态添加。
+eg2.
+请创建包含两个 Person 类的实例的 list，并给两个实例的 name 赋值，然后按照 name 进行排序。
+
+class Person(object):
+    pass
+
+p1 = Person()
+p1.name = 'Bart'
+
+p2 = Person()
+p2.name = 'Adam'
+
+p3 = Person()
+p3.name = 'Lisa'
+
+L1 = [p1, p2, p3]
+L2 = sorted(L1, lambda p1, p2: cmp(p1.name, p2.name))
+
+print L2[0].name
+print L2[1].name
+print L2[2].name
+
+4.python初始化实例
+
+setattr() 函数对应函数 getattr()，用于设置属性值，该属性不一定是存在的。
+setattr() 语法：
+setattr(object, name, value)
+
+以下实例展示了 setattr() 函数的使用方法：
+对已存在的属性进行赋值：
+>>>class A(object):
+...     bar = 1
+... 
+>>> a = A()
+>>> getattr(a, 'bar')          # 获取属性 bar 值
+1
+>>> setattr(a, 'bar', 5)       # 设置属性 bar 值
+>>> a.bar
+5
+
+eg.
+请定义Person类的__init__方法，除了接受 name、gender 和 birth 外，还可接受任意关键字参数，并把他们都作为属性赋值给实例。
+
+def Person(object):
+   def __int__ (self,age,name,**kw):
+         self.name=name
+         ...
+         for k,v in slef.iteritems
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
