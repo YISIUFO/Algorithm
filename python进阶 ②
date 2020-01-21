@@ -292,6 +292,15 @@ init C...
 init B...
 init D...
 
+9) 
+python中获取对象信息
+eg.
+ type() 函数获取变量的类型，它返回一个 Type 对象：
+>>> type(123)
+<type 'int'>
+>>> s = Student('Bob', 'Male', 88)
+>>> type(s)
+<class '__main__.Student'>
 
 
 4.python初始化实例
