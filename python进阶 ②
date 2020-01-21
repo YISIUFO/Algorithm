@@ -262,8 +262,35 @@ False   # p不是Student类型
 >>> isinstance(p, Teacher)
 False   # p不是Teacher类型
 
+8）
+多重继承
+eg.
+class A(object):
+    def __init__(self, a):
+        print 'init A...'
+        self.a = a
 
+class B(A):
+    def __init__(self, a):
+        super(B, self).__init__(a)
+        print 'init B...'
 
+class C(A):
+    def __init__(self, a):
+        super(C, self).__init__(a)
+        print 'init C...'
+
+class D(B, C):
+    def __init__(self, a):
+        super(D, self).__init__(a)
+        print 'init D...'
+
+运行结果：
+>>> d = D('d')
+init A...
+init C...
+init B...
+init D...
 
 
 
