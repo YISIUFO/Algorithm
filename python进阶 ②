@@ -359,14 +359,161 @@ Traceback (most recent call last):
 AttributeError: 'Person' object has no attribute '__job'
 
 
+6. 特殊方法
+
+1）
+python中 __str__和__repr__
+
+__str__()函数的作用：
+不知道大家再写程序是，打印一个实例化对象时，打印的其实时一个对象的地址。而通过__str__()函数就可以帮助我们打印对象中具体的属性值，或者你想得到的东西。
+因为再python中调用print()打印实例化对象时会调用__str__()如果__str__()中有返回值，就会打印其中的返回值。
+demo：
+class ss:
+    def __init__(self,age,name):
+        self.age = age
+        self.name = name
+    def __str__(self):
+        return str(self.age)+",,wozenmezhemeshuai,,"+self.name
+if __name__=="__main__":
+    s = ss(21,'aitebao')
+    print(s)
 
 
+eg.
+请给Student 类定义__str__和__repr__方法，使得能打印出<Student: name, gender, score>：
+class Person(object):
+
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+class Student(Person):
+    def __init__(self, name, gender, score):
+        super(Student, self).__init__(name, gender)
+        self.score = score
+
+    def __str__(self):
+        return '(Student: %s,%s,%s)' % (self.name,self.gender,self.score)
+     __repr__ = __str__
+     
+s = Student('Bob', 'male', 88)
+print s
+
+2）
+python中 __cmp__
+
+eg.
+class Student(object):
+
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+    def __str__(self):
+        return '(%s: %s)' % (self.name, self.score)
+
+    __repr__ = __str__
+
+    def __cmp__(self, s):
+        if self.score == s.score:
+            return cmp(self.name,s.name)
+        return -cmp(self.score,s.score)
+
+L = [Student('Tim', 99), Student('Bob', 88), Student('Alice', 99)]
+print sorted(L)
 
 
+3)
+python中的len函数
+
+要让 len() 函数工作正常，类必须提供一个特殊方法__len__()，它返回元素的个数。
+例如，我们写一个 Students 类，把名字传进去：
+class Students(object):
+    def __init__(self, *args):
+        self.names = args
+    def __len__(self):
+        return len(self.names)
+只要正确实现了__len__()方法，就可以用len()函数返回Students实例的“长度”：
+>>> ss = Students('Bob', 'Alice', 'Tim')
+>>> print len(ss)
+3
+
+eg.
+斐波那契数列是由 0, 1, 1, 2, 3, 5, 8...构成。
+请编写一个Fib类，Fib(10)表示数列的前10个元素，print Fib(10) 可以打印出数列的前 10 个元素，len(Fib(10))可以正确返回数列的个数10。
+
+class Fib(object):
+
+    def __init__(self, num):
+        a, b, L = 0, 1, []
+        for n in range(num):
+            L.append(a)
+            a, b = b, a + b
+        self.numbers = L
+        
+    def __str__(self):
+        return str(self.numbers)
+
+    __repr__ = __str__
+    
+    def __len__(self):
+        return len(self.numbers)
+
+f = Fib(10)
+print f
+print len(f)
+
+7.python中数学运算 
+
+要表示有理数，可以用一个Rational类来表示：
+class Rational(object):
+    def __init__(self, p, q):
+        self.p = p
+        self.q = q
+p、q 都是整数，表示有理数 p/q。
+
+eg.
+Rational类虽然可以做加法，但无法做减法、乘方和除法，请继续完善Rational类，实现四则运算。
+提示：
+减法运算：__sub__
+乘法运算：__mul__
+除法运算：__div_
+def gcd(a, b):   #求最大公约数
+    if b == 0:
+        return a
+    return gcd(b, a % b)
 
 
+class Rational(object):  
+    def __init__(self, p, q):
+        self.p = p
+        self.q = q
 
+    def __add__(self, r):
+        return Rational(self.p * r.q + self.q * r.p, self.q * r.q)
 
+    def __sub__(self, r):
+        return Rational(self.p * r.q - self.q * r.p, self.q * r.q)
+
+    def __mul__(self, r):
+        return Rational(self.p * r.p, self.q * r.q)
+
+    def __div__(self, r):
+        return Rational(self.p * r.q, self.q * r.p)
+
+    def __str__(self):
+        g = gcd(self.p, self.q)
+        return '%s/%s' % (self.p / g, self.q / g)
+        
+
+    __repr__ = __str__
+
+r1 = Rational(1, 2)
+r2 = Rational(1, 4)
+print r1 + r2
+print r1 - r2
+print r1 * r2
+print r1 / r2
 
 
 
