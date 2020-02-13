@@ -516,6 +516,7 @@ print r1 * r2
 print r1 / r2
 
 
+8.python的@property装饰器
 
 
 
